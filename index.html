@@ -143,11 +143,20 @@ async function dlApp(idx){
   const initData=tgInit();
   if(!initData){ document.getElementById('tgModal').classList.remove('hide'); return; }
   const btn=document.querySelector('.btn-dl');
-  if(btn){ btn.disabled=true; btn.textContent='⏳ বটে পাঠাচ্ছি...'; }
+  if(btn){ btn.disabled=true; btn.textContent='⏳ বটে পাঠাচ্ছি... 0%'; }
+  let poll=null;
   try{
-    const s=await (await fetch(API+'/api/dl_send',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({initData,app_id:a.id})})).json();
+    const req=fetch(API+'/api/dl_send',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({initData,app_id:a.id})});
+    poll=setInterval(async()=>{ try{
+      const p=await (await fetch(API+'/api/dl_progress',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({initData})})).json();
+      if(p.ok&&btn) btn.textContent='⏳ বটে পাঠাচ্ছি... '+p.pct+'%';
+    }catch(e){} },1000);
+    const s=await (await req).json();
+    if(poll) clearInterval(poll);
     if(s.ok){
+      if(btn) btn.textContent='✅ পাঠানো হয়েছে!';
       alert('✅ ফাইল টেলিগ্রামে পাঠিয়ে দিয়েছি!\nবটের চ্যাটে চেক করো 📲');
     } else if(s.reason==='toolarge'){
       const r=await (await fetch(API+'/api/dl',{method:'POST',headers:{'Content-Type':'application/json'},
@@ -159,7 +168,7 @@ async function dlApp(idx){
       else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
     } else if(s.reason==='nocredit'){ alert('🔒 ক্রেডিট শেষ! রেফার করো — ১ রেফার = ১ ডাউনলোড'); }
     else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
-  }catch(e){ alert('⚠ নেটওয়ার্ক সমস্যা!'); }
+  }catch(e){ if(poll) clearInterval(poll); alert('⚠ নেটওয়ার্ক সমস্যা!'); }
   if(btn){ btn.disabled=false; btn.textContent='⬇ DOWNLOAD NOW'; }
 }
 try{ if(window.Telegram&&Telegram.WebApp){ Telegram.WebApp.ready(); Telegram.WebApp.expand(); } }catch(e){}
