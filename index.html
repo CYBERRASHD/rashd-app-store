@@ -157,15 +157,11 @@ async function dlApp(idx){
     if(poll) clearInterval(poll);
     if(s.ok){
       if(btn) btn.textContent='✅ পাঠানো হয়েছে!';
-      alert('✅ ফাইল টেলিগ্রামে পাঠিয়ে দিয়েছি!\nবটের চ্যাটে চেক করো 📲');
-    } else if(s.reason==='toolarge'){
-      const r=await (await fetch(API+'/api/dl',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({initData,app_id:a.id})})).json();
-      if(r.ok){ const url=API+r.url;
-        try{ if(window.Telegram&&Telegram.WebApp){ Telegram.WebApp.openLink(url); return; } }catch(e){}
-        location.href=url;
-      } else if(r.reason==='nocredit'){ alert('🔒 ক্রেডিট শেষ! রেফার করো — ১ রেফার = ১ ডাউনলোড'); }
-      else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
+      if(s.method==='link'){
+        alert('📦 বড় ফাইল!\nডাউনলোড লিংক বটের চ্যাটে পাঠিয়ে দিয়েছি ✅\n\nলিংকটা কপি করে ব্রাউজারে (Chrome) ওপেন করো — ডাউনলোড শুরু হয়ে যাবে 📲');
+      } else {
+        alert('✅ ফাইল টেলিগ্রামে পাঠিয়ে দিয়েছি!\nবটের চ্যাটে চেক করো 📲');
+      }
     } else if(s.reason==='nocredit'){ alert('🔒 ক্রেডিট শেষ! রেফার করো — ১ রেফার = ১ ডাউনলোড'); }
     else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
   }catch(e){ if(poll) clearInterval(poll); alert('⚠ নেটওয়ার্ক সমস্যা!'); }
