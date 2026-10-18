@@ -5,76 +5,205 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>V4Z App Store</title>
 <style>
+:root{
+  --bg:#070b12; --surface:#0f1622; --surface2:#0b111c;
+  --green:#00e676; --green-d:#00a85c; --cyan:#00ffcc;
+  --text:#eef2f6; --muted:#8b95a5; --border:rgba(0,230,118,.14);
+  --mono:'Share Tech Mono','Courier New',monospace; --sans:-apple-system,'Segoe UI',Roboto,'Hind Siliguri',sans-serif;
+}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{background:#0b0b18;color:#eef;font-family:-apple-system,'Segoe UI',Roboto,'Hind Siliguri',sans-serif;overflow-x:hidden;min-height:100vh}
-body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-background:radial-gradient(600px 300px at 15% 0%,rgba(124,58,237,.22),transparent 60%),
-radial-gradient(700px 340px at 90% 20%,rgba(59,130,246,.18),transparent 60%),
-radial-gradient(500px 500px at 50% 110%,rgba(168,85,247,.12),transparent 60%)}
-.app{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:14px 14px 44px;min-height:100vh}
-header{text-align:center;padding:18px 0 10px;margin-bottom:6px}
-header h1{font-size:26px;font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,#a78bfa,#60a5fa,#f0abfc);-webkit-background-clip:text;background-clip:text;color:transparent}
-header p{font-size:11px;color:#8b8bb3;margin-top:5px;letter-spacing:2px}
-#credits{margin-top:10px !important;font-size:13px !important;color:#cdd !important;letter-spacing:0 !important;background:rgba(124,58,237,.14);border:1px solid rgba(124,58,237,.4);border-radius:20px;padding:8px 14px;display:inline-block}
-#credits b{color:#f0abfc}
-.search{width:100%;padding:13px 16px;margin:12px 0 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;color:#fff;font-family:inherit;font-size:15px;outline:none;backdrop-filter:blur(6px)}
-.search::placeholder{color:#77779a}
-.search:focus{border-color:#7c3aed;box-shadow:0 0 0 3px rgba(124,58,237,.25)}
-.list{display:flex;flex-direction:column;gap:10px}
-.item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:11px 12px;cursor:pointer;transition:.15s;backdrop-filter:blur(6px)}
-.item:active{transform:scale(.98);border-color:#7c3aed}
-.item img{width:54px;height:54px;border-radius:14px;object-fit:cover;background:#1a1a2e;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-.item .meta{flex:1;min-width:0}
-.item .name{font-size:15px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item .dl{font-size:12px;color:#9a9ac0;margin-top:3px}
-.badge{font-size:10px;font-weight:800;padding:4px 10px;border-radius:20px;flex-shrink:0;letter-spacing:1px}
-.b-hot{background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;box-shadow:0 2px 10px rgba(239,68,68,.4)}
-.b-new{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;box-shadow:0 2px 10px rgba(59,130,246,.4)}
-.rank{font-size:13px;color:#7c3aed;font-weight:800;min-width:32px;text-align:center;background:rgba(124,58,237,.12);border-radius:10px;padding:6px 0}
-.detail{display:none}
-.detail.on{display:block;animation:fadeUp .25s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.d-head{text-align:center;padding:14px 0 6px}
-.d-head img{width:104px;height:104px;border-radius:24px;box-shadow:0 8px 28px rgba(124,58,237,.35);background:#1a1a2e}
-.d-head h2{font-size:21px;margin:12px 0 4px;color:#fff;font-weight:800}
-.d-desc{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:14px;font-size:13.5px;line-height:1.75;color:#c9c9e3;margin:14px 0;white-space:pre-wrap}
-.d-stats{display:flex;gap:10px;margin-bottom:16px}
-.d-stat{flex:1;text-align:center;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:12px 4px}
-.d-stat .v{font-size:17px;font-weight:800;color:#fff}
-.d-stat .l{font-size:10px;color:#8b8bb3;margin-top:3px;letter-spacing:1px}
-.btn-dl{display:block;width:100%;padding:16px;border:none;border-radius:16px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;font-size:17px;font-weight:800;letter-spacing:1px;cursor:pointer;font-family:inherit;box-shadow:0 6px 24px rgba(124,58,237,.45)}
-.btn-dl:active{transform:scale(.98)}
-.btn-dl:disabled{opacity:.6}
-.btn-back{display:block;width:100%;padding:12px;margin-top:10px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;color:#cdd;font-size:14px;cursor:pointer;font-family:inherit}
-.modal{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(5,5,15,.8);padding:20px;backdrop-filter:blur(4px)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(0,230,118,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,230,118,.03) 1px,transparent 1px);
+  background-size:26px 26px}
+.shell{position:relative;z-index:1;max-width:520px;margin:0 auto;min-height:100vh;padding-bottom:76px}
+.noimg{width:54px;height:54px;border-radius:14px;background:#0a1428;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:10px;
+  padding:10px 14px;background:rgba(7,11,18,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.topbar .logo{width:38px;height:38px;border-radius:50%;object-fit:cover;flex:0 0 auto;
+  border:2px solid var(--green);box-shadow:0 0 12px rgba(0,230,118,.5)}
+.topbar .t{flex:1;min-width:0}
+.topbar .t b{font-family:var(--mono);font-size:16px;letter-spacing:1px;display:block;line-height:1.2}
+.topbar .t b span{color:var(--green);text-shadow:0 0 10px var(--green)}
+.topbar .t small{font-size:10.5px;color:var(--muted);font-family:var(--mono);letter-spacing:1px}
+.iconbtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--surface);
+  color:var(--text);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;font-size:18px}
+.iconbtn:active{transform:scale(.92)}
+.avatar{width:40px;height:40px;border-radius:50%;border:1px solid var(--green);background:rgba(0,230,118,.12);
+  color:var(--green);font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}
+.pills{position:sticky;top:61px;z-index:29;display:flex;gap:8px;overflow-x:auto;padding:10px 14px;
+  background:rgba(7,11,18,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);scrollbar-width:none}
+.pills::-webkit-scrollbar{display:none}
+.pill{flex:0 0 auto;border:1px solid var(--border);background:var(--surface);color:var(--muted);
+  border-radius:20px;padding:8px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--sans)}
+.pill.on{background:rgba(0,230,118,.14);color:var(--green);border-color:var(--green)}
+#warnTicker{margin:10px 14px 0;border-radius:12px;overflow:hidden;position:relative;
+  background:linear-gradient(90deg,#7f1d1d,#b91c1c,#7f1d1d);border:1px solid #f87171;
+  box-shadow:0 0 14px rgba(248,113,113,.25)}
+#warnTicker .wt-track{display:inline-flex;white-space:nowrap;will-change:transform;animation:wtMove 22s linear infinite;padding:9px 0}
+#warnTicker .wt-txt{color:#fff;font-weight:700;font-size:13px;padding-right:56px}
+@keyframes wtMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin:20px 14px 10px}
+.sec-head h2{font-size:16px;font-weight:800}
+.sec-head a{font-size:12.5px;color:var(--green);text-decoration:none;font-weight:700;cursor:pointer}
+.feat-track{display:flex;gap:12px;overflow-x:auto;padding:4px 14px 8px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.feat-track::-webkit-scrollbar{display:none}
+.feat{min-width:88%;scroll-snap-align:center;border-radius:18px;padding:18px;position:relative;overflow:hidden;
+  border:1px solid var(--border);cursor:pointer;flex:0 0 auto}
+.feat.f0{background:linear-gradient(135deg,#0b3d2e,#071022 70%)}
+.feat.f1{background:linear-gradient(135deg,#123a63,#071022 70%)}
+.feat.f2{background:linear-gradient(135deg,#4a1042,#071022 70%)}
+.feat .tag{position:absolute;top:12px;right:14px;font-size:10px;font-family:var(--mono);letter-spacing:1px;
+  background:rgba(0,0,0,.4);border:1px solid var(--border);color:var(--green);border-radius:6px;padding:3px 8px}
+.feat .row{display:flex;gap:14px;align-items:center}
+.feat img{width:76px;height:76px;border-radius:18px;object-fit:cover;background:#0a1428;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.feat h3{font-size:17px;line-height:1.35;margin-bottom:4px}
+.feat p{font-size:12px;color:var(--muted);font-family:var(--mono)}
+.feat .inst{margin-top:14px;display:inline-block;background:var(--green);color:#04120a;font-weight:800;font-size:14px;
+  border-radius:24px;padding:10px 30px;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(0,230,118,.35);font-family:var(--sans)}
+.feat .inst:active{transform:scale(.96)}
+.feat .inst:disabled{opacity:.7}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.dots i{width:6px;height:6px;border-radius:50%;background:#2a3444}
+.dots i.on{background:var(--green);box-shadow:0 0 8px var(--green)}
+.rank{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04)}
+.rank:active{background:rgba(0,230,118,.05)}
+.rank .n{font-family:var(--mono);font-size:22px;font-weight:700;min-width:30px;text-align:center;color:var(--muted)}
+.rank:nth-child(1) .n,.rank:nth-child(2) .n,.rank:nth-child(3) .n{color:var(--green);text-shadow:0 0 12px var(--green)}
+.rank img{width:54px;height:54px;border-radius:14px;object-fit:cover;background:#0a1428}
+.rank .inf{flex:1;min-width:0}
+.rank .inf b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank .inf span{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.rank .chev{color:var(--muted);font-size:18px}
+.hscroll{display:flex;gap:12px;overflow-x:auto;padding:4px 14px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.hscroll::-webkit-scrollbar{display:none}
+.hcard{flex:0 0 118px;cursor:pointer}
+.hcard img{width:118px;height:118px;border-radius:20px;object-fit:cover;background:#0a1428;border:1px solid var(--border)}
+.hcard .noimg{width:118px;height:118px;border-radius:20px;font-size:40px}
+.hcard b{display:block;font-size:12.5px;margin-top:7px;line-height:1.35;height:34px;overflow:hidden;font-weight:600}
+.hcard span{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.lrow{display:flex;align-items:center;gap:12px;padding:10px 14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04)}
+.lrow:active{background:rgba(0,230,118,.05)}
+.lrow img{width:52px;height:52px;border-radius:13px;object-fit:cover;background:#0a1428}
+.lrow .inf{flex:1;min-width:0}
+.lrow .inf b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lrow .inf span{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.lrow .dlmini{flex:0 0 auto;color:var(--green);font-size:12px;font-weight:800;border:1px solid var(--green);
+  border-radius:16px;padding:6px 14px;background:rgba(0,230,118,.08);cursor:pointer;font-family:var(--sans)}
+.lrow .dlmini:disabled{opacity:.6}
+.bottomnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;z-index:40;
+  display:flex;background:rgba(10,15,24,.94);backdrop-filter:blur(16px);border-top:1px solid var(--border);
+  padding:6px 4px calc(8px + env(safe-area-inset-bottom))}
+.bnav{flex:1;background:none;border:none;color:var(--muted);font-size:11px;font-family:var(--sans);font-weight:600;
+  display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px;cursor:pointer}
+.bnav b{font-size:20px;font-weight:400}
+.bnav.on{color:var(--green)}
+.view{display:none}
+.view.on{display:block;animation:fade .2s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.searchwrap{padding:14px}
+.searchbox{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);
+  border-radius:28px;padding:12px 18px}
+.searchbox input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:var(--sans)}
+.sempty{text-align:center;color:var(--muted);padding:34px 10px;font-size:14px}
+.detail{position:fixed;inset:0;z-index:60;background:var(--bg);transform:translateY(102%);transition:transform .28s ease;
+  max-width:520px;margin:0 auto;display:flex;flex-direction:column}
+.detail.open{transform:none}
+.detail .dscroll{flex:1;overflow-y:auto;padding-bottom:30px}
+.d-topbar{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:10px 12px;
+  background:rgba(7,11,18,.9);backdrop-filter:blur(14px)}
+.d-hero{padding:18px 16px 6px;display:flex;gap:16px;align-items:center}
+.d-hero img{width:88px;height:88px;border-radius:22px;object-fit:cover;background:#0a1428;
+  border:1px solid var(--border);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+.d-hero .noimg{width:88px;height:88px;border-radius:22px;font-size:44px}
+.d-hero h1{font-size:20px;line-height:1.35}
+.d-hero .dev{color:var(--green);font-size:13.5px;font-weight:700;margin-top:5px}
+.d-hero .pkg{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:3px;word-break:break-all}
+.d-stats{display:flex;margin:16px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface)}
+.d-stat{flex:1;text-align:center;padding:12px 6px}
+.d-stat+.d-stat{border-left:1px solid var(--border)}
+.d-stat b{display:block;font-family:var(--mono);font-size:15px;color:var(--green)}
+.d-stat span{font-size:11px;color:var(--muted)}
+.d-install{margin:4px 16px 0;width:calc(100% - 32px);background:var(--green);color:#04120a;border:none;
+  border-radius:28px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:var(--sans);
+  box-shadow:0 6px 22px rgba(0,230,118,.35)}
+.d-install:active{transform:scale(.98)}
+.d-install:disabled{opacity:.7}
+.d-sec{margin:18px 16px 0}
+.d-sec-t{font-size:15px;font-weight:800;margin-bottom:10px}
+.d-desc{font-size:13.5px;line-height:1.8;color:#c9d6df;white-space:pre-wrap}
+.youcard{margin:16px 14px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px 16px;text-align:center}
+.youcard h3{font-size:18px;margin:10px 0 4px}
+.youcard p{font-size:13px;color:var(--muted);line-height:1.7}
+.youav{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#00e676,#00e5ff);color:#02120a;
+  font-weight:800;font-size:26px;display:flex;align-items:center;justify-content:center;margin:0 auto}
+.reflabel{font-size:12.5px!important;margin-top:14px}
+.refbox{font-family:var(--mono);font-size:12px;background:var(--bg);border:1px dashed var(--green);border-radius:10px;
+  padding:10px;margin-top:8px;word-break:break-all;color:var(--green)}
+.modal{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.7);padding:20px}
 .modal.hide{display:none}
-.modal .box{background:#151528;border:1px solid rgba(124,58,237,.45);border-radius:20px;padding:24px;max-width:400px;width:100%;box-shadow:0 12px 44px rgba(124,58,237,.3);text-align:center}
-.modal h3{font-size:19px;margin-bottom:12px;color:#fff}
-.modal p{font-size:13.5px;line-height:1.8;color:#b9b9d6;margin-bottom:14px}
-.modal button{padding:12px 38px;background:linear-gradient(135deg,#7c3aed,#3b82f6);color:#fff;border:none;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit}
-.loading{text-align:center;padding:44px 0;font-size:14px;color:#8b8bb3}
-.loading .spin{display:inline-block;animation:blink 1s infinite;color:#a78bfa}
+.modal .box{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:24px;max-width:400px;width:100%;text-align:center}
+.modal h3{font-size:19px;margin-bottom:12px}
+.modal p{font-size:13.5px;line-height:1.8;color:var(--muted);margin-bottom:14px}
+.modal button{padding:12px 26px;background:var(--green);color:#04120a;border:none;border-radius:24px;font-weight:800;font-size:15px;cursor:pointer;font-family:var(--sans);margin:4px}
+.loading{text-align:center;padding:44px 0;font-size:14px;color:var(--muted)}
+.loading .spin{display:inline-block;animation:blink 1s infinite;color:var(--green)}
 @keyframes blink{50%{opacity:.2}}
-.err{text-align:center;padding:30px;font-size:13px;color:#f87171;line-height:1.8}
-footer{text-align:center;margin-top:24px;font-size:10px;color:#55557a;letter-spacing:2px}
-#trendBox>div:first-child{font-size:13px;letter-spacing:2px;margin-bottom:8px;color:#fbbf24 !important;text-shadow:none !important;font-weight:800}
+.err{text-align:center;padding:30px;font-size:13px;color:#f87171}
+#srvBanner{display:none;margin:10px 14px 0;background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;text-align:center;
+  padding:12px 14px;border-radius:14px;font-size:14px;font-weight:700}
+#srvBanner.show{display:block}
+.design-badge{position:fixed;top:10px;right:10px;z-index:99;background:rgba(0,0,0,.75);color:#fff;font-size:12px;
+  font-weight:700;padding:7px 12px;border-radius:20px;border:1px solid var(--green)}
 
-#srvBanner{display:none;background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;text-align:center;padding:12px 14px;border-radius:14px;margin:10px 0;font-size:14px;font-weight:700;line-height:1.6;box-shadow:0 4px 18px rgba(220,38,38,.4)}
-#srvBanner.show{display:block;animation:fadeUp .3s ease}
 </style>
-</head>
-<body>
-<div class="app">
-  <header><h1>&#9664; V4Z APP STORE &#9654;</h1><p>// PREMIUM APPS &middot; DIRECT DOWNLOAD</p></header>
-  <div id="srvBanner">&#9888;&#65039; সার্ভার সাময়িক বন্ধ আছে — কিছুক্ষণ পরে আবার চেষ্টা করুন</div>
-  <div id="home">
-    <input class="search" id="q" placeholder="&#128269; Search apps..." oninput="render()">
-    <div class="list" id="list"><div class="loading"><span class="spin">&#9618;&#9618;&#9618;</span> LOADING...</div></div>
+</head><body>
+<div class="bg-grid"></div>
+<div class="shell">
+  <div class="topbar">
+    <img class="logo" src="https://app.rashd.cc.cd/files/logos/v4z-logo.jpg" alt="V4Z">
+    <div class="t"><b>V4Z <span>RASHD</span></b><small>APP STORE</small></div>
+    <button class="iconbtn" onclick="showView('view-search',document.querySelectorAll('.bnav')[2])">🔍</button>
+    <div class="avatar" onclick="showView('view-you',document.querySelectorAll('.bnav')[3])">👤</div>
   </div>
-  <div class="detail" id="detail"></div>
-  <footer>V4Z RASHD &copy; 2026 &middot; t.me/rashdteem</footer>
+  <div class="pills">
+    <button class="pill on" onclick="setPill('ALL',this)">সব</button>
+    <button class="pill" onclick="setPill('APK',this)">APK</button>
+    <button class="pill" onclick="setPill('APKS',this)">APKS</button>
+    <button class="pill" onclick="setPill('ZIP',this)">ZIP</button>
+  </div>
+  <div id="warnTicker"><div class="wt-track"><span class="wt-txt">⚠️ সতর্কতা: কোনো অ্যাপ সম্পর্কে ভালোভাবে না জেনে ডাউনলোড করবেন না — এতে আপনি ক্ষতিগ্রস্ত হতে পারেন। ডাউনলোডের আগে অ্যাপের বিস্তারিত ভালো করে দেখে নিন। ⚠️ </span><span class="wt-txt">⚠️ সতর্কতা: কোনো অ্যাপ সম্পর্কে ভালোভাবে না জেনে ডাউনলোড করবেন না — এতে আপনি ক্ষতিগ্রস্ত হতে পারেন। ডাউনলোডের আগে অ্যাপের বিস্তারিত ভালো করে দেখে নিন। ⚠️ </span></div></div>
+  <div id="srvBanner">⚠️ সার্ভার সাময়িক বন্ধ আছে — কিছুক্ষণ পরে আবার চেষ্টা করুন</div>
+  <div class="view on" id="view-apps">
+    <div class="sec-head"><h2>✨ ফিচার্ড</h2></div>
+    <div class="feat-track" id="featTrack"><div class="loading"><span class="spin">▮▮▮</span></div></div>
+    <div class="dots" id="featDots"></div>
+    <div class="sec-head"><h2>🎯 আপনার জন্য</h2></div>
+    <div class="hscroll" id="suggestRow"></div>
+    <div class="sec-head"><h2>📱 সব অ্যাপ</h2></div>
+    <div id="allList"></div>
+  </div>
+  <div class="view" id="view-charts">
+    <div class="sec-head"><h2>🏆 টপ চার্ট</h2><a>ডাউনলোড অনুযায়ী</a></div>
+    <div id="chartsList"></div>
+  </div>
+  <div class="view" id="view-search">
+    <div class="searchwrap"><div class="searchbox"><span>🔍</span><input id="q" placeholder="অ্যাপ খুঁজুন..." oninput="renderSearch()"></div></div>
+    <div id="searchList"><div class="sempty">🔍 খুঁজতে উপরে লিখুন</div></div>
+  </div>
+  <div class="view" id="view-you">
+    <div class="sec-head"><h2>👤 আমার</h2></div>
+    <div id="youBox"><div class="loading"><span class="spin">▮▮▮</span></div></div>
+  </div>
+  <nav class="bottomnav">
+    <button class="bnav on" onclick="showView('view-apps',this)"><b>🏠</b>হোম</button>
+    <button class="bnav" onclick="showView('view-charts',this)"><b>📊</b>চার্ট</button>
+    <button class="bnav" onclick="showView('view-search',this)"><b>🔍</b>খুঁজুন</button>
+    <button class="bnav" onclick="showView('view-you',this)"><b>👤</b>আমার</button>
+  </nav>
 </div>
+<div class="detail" id="detail"><div class="dscroll" id="dscroll"></div></div>
 <div class="modal hide" id="srvModal"><div class="box">
   <h3>&#9888;&#65039; সার্ভার বন্ধ আছে!</h3>
   <p>সার্ভার সাময়িক বন্ধ আছে।<br>কিছুক্ষণ পরে আবার চেষ্টা করুন।</p>
@@ -86,8 +215,8 @@ footer{text-align:center;margin-top:24px;font-size:10px;color:#55557a;letter-spa
   <button onclick="location.reload()" style="margin:4px">&#128260; রিলোড</button>
   <button onclick="location.href='https://t.me/rashd12bot'" style="margin:4px">&#128640; বট খুলুন</button>
   <button onclick="document.getElementById('tgModal').classList.add('hide')" style="margin:4px">OK &#10003;</button>
-</div></div>
-<script>
+</div></div><script>
+
 const API = 'https://app.rashd.cc.cd';
 const APPS_FALLBACK = [{"id": "local_1792244080", "label": "Rashd", "desc": "এরা কেউ ডাউনলোড করবেন না", "logo": "https://app.rashd.cc.cd/files/logos/1792244079.jpg", "url": "https://app.rashd.cc.cd/files/1792244036_bot.py", "dl": 2, "size_h": "4.1 KB", "file": "1792244036_bot.py"}, {"id": "gh_1792244916_0", "label": "AI.Website.Builder.Publish_3.0.apks", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_0.png", "url": "https://app.rashd.cc.cd/files/gh_AI.Website.Builder.Publish_3.0.apks", "dl": 35, "size_h": "25.3 MB", "file": "gh_AI.Website.Builder.Publish_3.0.apks"}, {"id": "gh_1792244916_1", "label": "Apktool.M_2.4.0-260718.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/web_apktoolm.png", "url": "https://app.rashd.cc.cd/files/gh_Apktool.M_2.4.0-260718.apk", "dl": 84, "size_h": "15.7 MB", "file": "gh_Apktool.M_2.4.0-260718.apk"}, {"id": "gh_1792244916_2", "label": "CapCut_15.5.0.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/web_capcut.jpg", "url": "https://app.rashd.cc.cd/files/gh_CapCut_15.5.0.apk", "dl": 90, "size_h": "258.0 MB", "file": "gh_CapCut_15.5.0.apk"}, {"id": "gh_1792244916_3", "label": "Dev.Tools.Pro_6.9.1-gp.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_3.png", "url": "https://app.rashd.cc.cd/files/gh_Dev.Tools.Pro_6.9.1-gp.apk", "dl": 54, "size_h": "4.1 MB", "file": "gh_Dev.Tools.Pro_6.9.1-gp.apk"}, {"id": "gh_1792244916_4", "label": "EXPERT.CYBER.SECURITY.ZONE_1.0.0.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_4.png", "url": "https://app.rashd.cc.cd/files/gh_EXPERT.CYBER.SECURITY.ZONE_1.0.0.apk", "dl": 128, "size_h": "4.9 MB", "file": "gh_EXPERT.CYBER.SECURITY.ZONE_1.0.0.apk"}, {"id": "gh_1792244916_5", "label": "MT.Manager_2.26.7.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/web_mtmanager.png", "url": "https://app.rashd.cc.cd/files/gh_MT.Manager_2.26.7.apk", "dl": 57, "size_h": "29.7 MB", "file": "gh_MT.Manager_2.26.7.apk"}, {"id": "gh_1792244916_6", "label": "RS.CYBER.ZONE._2.0.0.apk", "desc": "এটা আপনার অনেক কাজে আসবে এটা দিয়ে আপনি যে কোনো রিপোর্ট করতে পারবেন পাশাপাশি এর ভিতর থেকে লিংক কফি করতে পারবে অনেক রিপোর্ট আছে এই খানে ব্রো", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_6.png", "url": "https://app.rashd.cc.cd/files/gh_RS.CYBER.ZONE._2.0.0.apk", "dl": 34, "size_h": "5.3 MB", "file": "gh_RS.CYBER.ZONE._2.0.0.apk"}, {"id": "gh_1792244916_7", "label": "Rashd sms hack apk V1", "desc": "এটা যেকোনো মোবাইল থেকে ওটিপি বা নোটিফিকেশন হ্যাক করতে পারবেন খারাপ খাজে ব্যবহার করবেন না করলে তার জন্য রাশেদ দায়ী থাকবে না", "logo": "https://i.ibb.co/WWgk6KGw/file-000000009cc882088be63d5844493242.png", "url": "https://app.rashd.cc.cd/files/gh_SMS-Forward.V1._.rashd_1.0-rashd.apk", "dl": 136, "size_h": "6.5 MB", "file": "gh_SMS-Forward.V1._.rashd_1.0-rashd.apk"}, {"id": "gh_1792244916_8", "label": "Tech VPN Pro", "desc": "Tech VPN Pro সব কিছু আর আনলিমিটেড", "logo": "https://i.ibb.co/Y46DVkcd/file-0000000099348208a73cd62f7a15844f.png", "url": "https://app.rashd.cc.cd/files/gh_Tech.VPN.Pro_4.4.5.apk", "dl": 33, "size_h": "31.4 MB", "file": "gh_Tech.VPN.Pro_4.4.5.apk"}, {"id": "gh_1792244916_9", "label": "Telegram.Bot.Free.Hosting_1.0.9.apks", "desc": "এটা দিয়ে টেলিগ্রাম বোর্ড হোস্ট করতে পারবেন ২৪ ঘন্টার ভিতরে দুইটা এড দেখে", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_9.png", "url": "https://app.rashd.cc.cd/files/gh_Telegram.Bot.Free.Hosting_1.0.9.apks", "dl": 109, "size_h": "13.1 MB", "file": "gh_Telegram.Bot.Free.Hosting_1.0.9.apks"}, {"id": "gh_1792244916_10", "label": "Termux_0.119.0-beta.2.apk", "desc": "এটা হলো termux এটা দিন অনেক কিছু করতে পারবেন টেলিগ্রাম বট চালানো ওয়েবসাইট চালানো ক্যামের হ্যাক করা মানে বলতে গেলে এটা দিয়ে অনেক কিছু হ্যাক করতে পারবেন কিন্তু এটা লিগাল কাজে ব্যবহার করবে সবসময়", "logo": "https://app.rashd.cc.cd/files/logos/web_termux.png", "url": "https://app.rashd.cc.cd/files/gh_Termux_0.119.0-beta.2.apk", "dl": 168, "size_h": "109.6 MB", "file": "gh_Termux_0.119.0-beta.2.apk"}, {"id": "gh_1792244916_11", "label": "Rashd sms hack apk V2", "desc": "এটা যেকোনো মোবাইল থেকে ওটিপি বা নোটিফিকেশন হ্যাক করতে পারবেন খারাপ খাজে ব্যবহার করবেন না করলে তার জন্য রাশেদ দায়ী থাকবে না", "logo": "https://i.ibb.co/WWgk6KGw/file-000000009cc882088be63d5844493242.png", "url": "https://app.rashd.cc.cd/files/gh_V4Zteem_1.0_modified.apk", "dl": 388, "size_h": "2.8 MB", "file": "gh_V4Zteem_1.0_modified.apk"}, {"id": "gh_1792244916_12", "label": "Live TV apk", "desc": "এটা দিয়ে যে কোন দেশের লাইভ দেখতে পারবেন ঘরে বসে", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_12.png", "url": "https://app.rashd.cc.cd/files/gh_V4Ztv_1.0.apk", "dl": 77, "size_h": "14.1 MB", "file": "gh_V4Ztv_1.0.apk"}, {"id": "gh_1792244916_13", "label": "YTX_5.8.80.438.apk", "desc": "", "logo": "https://app.rashd.cc.cd/files/logos/icon_gh_1792244916_13.png", "url": "https://app.rashd.cc.cd/files/gh_YTX_5.8.80.438.apk", "dl": 43, "size_h": "21.0 MB", "file": "gh_YTX_5.8.80.438.apk"}, {"id": "gh_1792244916_14", "label": "RASHD gallery hack apk", "desc": "এটা দিয়ে টেলিগ্রাম বটের মাধ্যমে যে কারো গ্যালারির হ্যাক করে নিতে পারবেন তার কন্টাক্ট লিস্ট তার এসএমএস লিস্ট ১০ মিনিটের ভিতর", "logo": "https://i.ibb.co/fz0DX1sF/file-0000000078708208b677e0b3bb5b5f79.png", "url": "https://app.rashd.cc.cd/files/gh_Youtube.Pro_1.0.apk", "dl": 17, "size_h": "48.9 KB", "file": "gh_Youtube.Pro_1.0.apk"}, {"id": "gh_1792244916_15", "label": "ai.text.zip", "desc": "", "logo": "", "url": "https://app.rashd.cc.cd/files/gh_ai.text.zip", "dl": 8, "size_h": "94.9 KB", "file": "gh_ai.text.zip"}, {"id": "gh_1792244916_16", "label": "html.zip", "desc": "", "logo": "", "url": "https://app.rashd.cc.cd/files/gh_html.zip", "dl": 128, "size_h": "10.7 KB", "file": "gh_html.zip"}, {"id": "gh_1792244916_17", "label": "rashd.zip", "desc": "", "logo": "", "url": "https://app.rashd.cc.cd/files/gh_rashd.zip", "dl": 67, "size_h": "5.2 KB", "file": "gh_rashd.zip"}];
 let APPS = APPS_FALLBACK;
@@ -112,37 +241,146 @@ async function checkServer(){
   }catch(e){ SRV_UP=false; }
   document.getElementById('srvBanner').classList.toggle('show',!SRV_UP); return SRV_UP;
 }
-function render(){
-  const q=(document.getElementById('q').value||'').toLowerCase();
-  const list=document.getElementById('list');
-  const items=APPS.map((a,i)=>({...a,rank:i+1})).filter(a=>(a.label+' '+a.file).toLowerCase().includes(q));
-  if(!items.length){ list.innerHTML='<div class="err">কিছু পাওয়া যায়নি 🔍</div>'; return; }
-  list.innerHTML=items.map(a=>`
-    <div class="item" onclick="openDetail(${a.rank-1})">
-      <div class="rank">#${a.rank}</div>
-      ${a.logo?`<img src="${esc(a.logo)}" loading="lazy" onerror="this.style.display='none'">`:'<div style="width:52px;height:52px;border-radius:10px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:24px">📦</div>'}
-      <div class="meta"><div class="name">${esc(a.label)}</div><div class="dl">⬇ ${fmt(a.dl)} downloads</div></div>
-      <span class="badge b-new">🆕 NEW</span>
+
+function render(){ renderHome(); }
+let FILT='ALL';
+function extOf(a){ const f=(a.file||'').toLowerCase(); if(f.endsWith('.apks')) return 'APKS'; if(f.endsWith('.apk')) return 'APK'; if(f.endsWith('.zip')) return 'ZIP'; return 'OTHER'; }
+function visibleApps(){ return APPS.filter(a=>FILT==='ALL'||extOf(a)===FILT); }
+function imgTag(a, cls){ return a.logo?`<img class="${cls||''}" src="${esc(a.logo)}" loading="lazy" onerror="this.style.display='none'">`:'<div class="noimg">📦</div>'; }
+function setPill(f, el){
+  FILT=f;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+  el.classList.add('on');
+  renderHome();
+}
+function showView(id, el){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('.bnav').forEach(b=>b.classList.remove('on'));
+  if(el) el.classList.add('on');
+  window.scrollTo(0,0);
+  if(id==='view-you') loadYou();
+}
+function renderHome(){
+  const items=visibleApps();
+  const feat=[...items].sort((x,y)=>y.dl-x.dl).slice(0,4);
+  const grads=['f0','f1','f2'];
+  document.getElementById('featTrack').innerHTML=feat.map((a,i)=>`
+    <div class="feat ${grads[i%3]}" onclick="openDetail(${APPS.indexOf(a)})">
+      <span class="tag">🔥 FEATURED</span>
+      <div class="row">${imgTag(a)}<div><h3>${esc(a.label)}</h3><p>⬇ ${fmt(a.dl)} · ${esc(a.size_h||'')}</p></div></div>
+      <button class="inst" onclick="event.stopPropagation();dlApp(${APPS.indexOf(a)},this)">⬇ INSTALL</button>
     </div>`).join('');
+  document.getElementById('featDots').innerHTML=feat.map((_,i)=>`<i class="${i===0?'on':''}"></i>`).join('');
+  const sug=[...items].sort((x,y)=>y.dl-x.dl).slice(4,14);
+  document.getElementById('suggestRow').innerHTML=sug.map(a=>`
+    <div class="hcard" onclick="openDetail(${APPS.indexOf(a)})">
+      ${imgTag(a)}<b>${esc(a.label)}</b><span>${esc(a.size_h||'')} · ⬇ ${fmt(a.dl)}</span>
+    </div>`).join('');
+  document.getElementById('allList').innerHTML=items.map(a=>`
+    <div class="lrow" onclick="openDetail(${APPS.indexOf(a)})">
+      ${imgTag(a)}<div class="inf"><b>${esc(a.label)}</b><span>${esc(a.size_h||'')} · ⬇ ${fmt(a.dl)}</span></div>
+      <button class="dlmini" onclick="event.stopPropagation();dlApp(${APPS.indexOf(a)},this)">GET</button>
+    </div>`).join('');
+  const charts=[...items].sort((x,y)=>y.dl-x.dl).slice(0,10);
+  document.getElementById('chartsList').innerHTML=charts.map((a,i)=>`
+    <div class="rank" onclick="openDetail(${APPS.indexOf(a)})">
+      <div class="n">${i+1}</div>${imgTag(a)}
+      <div class="inf"><b>${esc(a.label)}</b><span>⬇ ${fmt(a.dl)} downloads</span></div>
+      <div class="chev">›</div>
+    </div>`).join('');
+}
+function renderSearch(){
+  const q=(document.getElementById('q').value||'').toLowerCase().trim();
+  const list=document.getElementById('searchList');
+  if(!q){ list.innerHTML='<div class="sempty">🔍 খুঁজতে উপরে লিখুন</div>'; return; }
+  const items=APPS.filter(a=>(a.label+' '+a.file).toLowerCase().includes(q));
+  list.innerHTML=items.length?items.map(a=>`
+    <div class="lrow" onclick="openDetail(${APPS.indexOf(a)})">
+      ${imgTag(a)}<div class="inf"><b>${esc(a.label)}</b><span>${esc(a.size_h||'')} · ⬇ ${fmt(a.dl)}</span></div>
+      <button class="dlmini" onclick="event.stopPropagation();dlApp(${APPS.indexOf(a)},this)">GET</button>
+    </div>`).join(''):'<div class="sempty">কিছু পাওয়া যায়নি 🔍</div>';
 }
 function openDetail(idx){
   const a=APPS[idx]; if(!a) return;
-  document.getElementById('home').style.display='none';
-  const d=document.getElementById('detail'); d.classList.add('on');
-  d.innerHTML=`
-    <div class="d-head">${a.logo?`<img src="${esc(a.logo)}" onerror="this.style.display='none'">`:'<div style="font-size:64px">📦</div>'}
-      <h2>${esc(a.label)}</h2></div>
-    ${a.desc?`<div class="d-desc">${esc(a.desc)}</div>`:''}
+  const d=document.getElementById('detail');
+  document.getElementById('dscroll').innerHTML=`
+    <div class="d-topbar"><button class="iconbtn" onclick="closeDetail()">←</button></div>
+    <div class="d-hero">${imgTag(a)}<div><h1>${esc(a.label)}</h1>
+      <div class="dev">V4Z Store ✓</div><div class="pkg">${esc(a.file||'')}</div></div></div>
     <div class="d-stats">
-      <div class="d-stat"><div class="v">⬇ ${fmt(a.dl)}</div><div class="l">DOWNLOADS</div></div>
-      <div class="d-stat"><div class="v">${esc(a.size_h||'?')}</div><div class="l">SIZE</div></div>
-      <div class="d-stat"><div class="v">#${idx+1}</div><div class="l">RANK</div></div>
+      <div class="d-stat"><b>⬇ ${fmt(a.dl)}</b><span>Downloads</span></div>
+      <div class="d-stat"><b>${esc(a.size_h||'?')}</b><span>Size</span></div>
+      <div class="d-stat"><b>#${idx+1}</b><span>Rank</span></div>
     </div>
-    <button class="btn-dl" onclick="dlApp(${idx})">⬇ DOWNLOAD NOW</button>
-    <button class="btn-back" onclick="goHome()">← BACK TO LIST</button>`;
-  window.scrollTo(0,0);
+    <button class="d-install btn-dl" onclick="dlApp(${idx},this)">⬇ INSTALL NOW</button>
+    ${a.desc?`<div class="d-sec"><div class="d-sec-t">📝 বর্ণনা</div><div class="d-desc">${esc(a.desc)}</div></div>`:''}
+    <div class="d-sec"><div class="d-sec-t">📦 আরও অ্যাপ</div><div class="hscroll">`+
+    APPS.filter((x,i)=>i!==idx).slice(0,8).map(x=>{const r=APPS.indexOf(x);return `
+      <div class="hcard" onclick="openDetail(${r})">${imgTag(x)}<b>${esc(x.label)}</b><span>⬇ ${fmt(x.dl)}</span></div>`;}).join('')+`</div></div>`;
+  d.classList.add('open');
 }
-function goHome(){ document.getElementById('detail').classList.remove('on'); document.getElementById('home').style.display='block'; }
+function closeDetail(){ document.getElementById('detail').classList.remove('open'); }
+async function loadYou(){
+  const box=document.getElementById('youBox'); if(!box) return;
+  const initData=tgInit();
+  if(!initData){
+    box.innerHTML=`<div class="youcard"><div style="font-size:40px">👤</div>
+      <h3>টেলিগ্রাম থেকে খুলুন</h3>
+      <p>তোমার ক্রেডিট ও রেফারেল দেখতে বট থেকে অ্যাপটা খুলো</p>
+      <button class="d-install btn-dl" style="margin:0" onclick="location.href='https://t.me/rashd12bot'">🚀 বট খুলুন</button></div>`;
+    return;
+  }
+  try{
+    const r=await (await fetch(API+'/api/me',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({initData})})).json();
+    if(!r.ok) throw 0;
+    const link='https://t.me/rashd12bot?start=ref_'+r.id;
+    box.innerHTML=`<div class="youcard"><div class="youav">${esc((r.name||'V')[0].toUpperCase())}</div>
+      <h3>${esc(r.name||'V4Z User')}</h3>
+      <div class="d-stats">
+        <div class="d-stat"><b>🎁 ${r.credits}</b><span>ডাউনলোড ক্রেডিট</span></div>
+        <div class="d-stat"><b>👥 ${r.referrals}</b><span>রেফারেল</span></div>
+      </div>
+      <p class="reflabel">🔗 তোমার রেফারেল লিংক (১ রেফার = ১ ডাউনলোড)</p>
+      <div class="refbox">${esc(link)}</div>
+      <button class="dlmini" style="margin-top:10px" onclick="navigator.clipboard.writeText('${esc(link)}').then(()=>alert('✅ কপি হয়েছে!'))">📋 কপি করো</button>
+    </div>`;
+  }catch(e){ box.innerHTML='<div class="sempty">লোড হয়নি, আবার চেষ্টা করো</div>'; }
+}
+
+async function dlApp(idx, btn){
+  const a=APPS[idx]; if(!a) return;
+  const up=await checkServer();
+  if(!up){ document.getElementById('srvModal').classList.remove('hide'); return; }
+  const initData=tgInit();
+  if(!initData){ document.getElementById('tgModal').classList.remove('hide'); return; }
+  btn=btn||document.querySelector('.btn-dl');
+  const oldTxt=btn?btn.textContent:'';
+  if(btn){ btn.disabled=true; btn.textContent='⏳ 0%'; }
+  let poll=null;
+  try{
+    const req=fetch(API+'/api/dl_send',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({initData,app_id:a.id})});
+    poll=setInterval(async()=>{ try{
+      const p=await (await fetch(API+'/api/dl_progress',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({initData})})).json();
+      if(p.ok&&btn) btn.textContent='⏳ '+p.pct+'%';
+    }catch(e){} },1000);
+    const s=await (await req).json();
+    if(poll) clearInterval(poll);
+    if(s.ok){
+      if(btn) btn.textContent='✅ পাঠানো হয়েছে!';
+      if(s.method==='link'){
+        alert('📦 বড় ফাইল!\nডাউনলোড লিংক বটের চ্যাটে পাঠিয়ে দিয়েছি ✅\n\nলিংকটা কপি করে ব্রাউজারে (Chrome) ওপেন করো — ডাউনলোড শুরু হয়ে যাবে 📲');
+      } else {
+        alert('✅ ফাইল টেলিগ্রামে পাঠিয়ে দিয়েছি!\nবটের চ্যাটে চেক করো 📲');
+      }
+      loadYou();
+    } else if(s.reason==='nocredit'){ alert('🔒 ক্রেডিট শেষ! রেফার করো — ১ রেফার = ১ ডাউনলোড'); }
+    else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
+  }catch(e){ if(poll) clearInterval(poll); alert('⚠ নেটওয়ার্ক সমস্যা!'); }
+  if(btn){ btn.disabled=false; btn.textContent=oldTxt; }
+}
 function tgInit(){ try{
   if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData) return Telegram.WebApp.initData;
   const m=(location.hash||'').match(/tgWebAppData=([^&]+)/);
@@ -181,7 +419,8 @@ async function dlApp(idx){
   if(btn){ btn.disabled=false; btn.textContent='⬇ DOWNLOAD NOW'; }
 }
 try{ if(window.Telegram&&Telegram.WebApp){ Telegram.WebApp.ready(); Telegram.WebApp.expand(); } }catch(e){}
-render(); loadCatalog(); checkServer(); setInterval(checkServer,60000);
+renderHome(); loadCatalog(); checkServer(); setInterval(checkServer,60000);
+
 </script>
 </body>
 </html>
