@@ -83,7 +83,9 @@ footer{text-align:center;margin-top:24px;font-size:10px;color:#55557a;letter-spa
 <div class="modal hide" id="tgModal"><div class="box">
   <h3>&#128241; টেলিগ্রাম থেকে খুলুন</h3>
   <p>ডাউনলোড করতে টেলিগ্রাম বট থেকে অ্যাপটা খুলুন!<br><br>&#128073; @rashd12bot</p>
-  <button onclick="document.getElementById('tgModal').classList.add('hide')">OK &#10003;</button>
+  <button onclick="location.reload()" style="margin:4px">&#128260; রিলোড</button>
+  <button onclick="location.href='https://t.me/rashd12bot'" style="margin:4px">&#128640; বট খুলুন</button>
+  <button onclick="document.getElementById('tgModal').classList.add('hide')" style="margin:4px">OK &#10003;</button>
 </div></div>
 <script>
 const API = 'https://app.rashd.cc.cd';
@@ -128,7 +130,12 @@ function openDetail(idx){
   window.scrollTo(0,0);
 }
 function goHome(){ document.getElementById('detail').classList.remove('on'); document.getElementById('home').style.display='block'; }
-function tgInit(){ try{ return (window.Telegram&&Telegram.WebApp)?Telegram.WebApp.initData:''; }catch(e){ return ''; } }
+function tgInit(){ try{
+  if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.initData) return Telegram.WebApp.initData;
+  const m=(location.hash||'').match(/tgWebAppData=([^&]+)/);
+  if(m) return decodeURIComponent(m[1]);
+  return '';
+}catch(e){ return ''; } }
 async function dlApp(idx){
   const a=APPS[idx]; if(!a) return;
   const up=await checkServer();
