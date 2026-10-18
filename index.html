@@ -70,7 +70,7 @@ footer{text-align:center;margin-top:24px;font-size:10px;color:#55557a;letter-spa
     <h1>&#9664; V4Z APP STORE &#9654;</h1>
     <p>// PREMIUM APPS &middot; DIRECT DOWNLOAD</p>
   </header>
-  <div id="srvBanner">&#9888;&#65039; \u09b8\u09be\u09b0\u09cd\u09ad\u09be\u09b0 \u09b8\u09be\u09ae\u09af\u09bc\u09bf\u0995 \u09ac\u09a8\u09cd\u09a7 \u0986\u099b\u09c7 \u2014 \u0995\u09bf\u099b\u09c1\u0995\u09cd\u09b7\u09a3 \u09aa\u09b0\u09c7 \u0986\u09ac\u09be\u09b0 \u099a\u09c7\u09b7\u09cd\u099f\u09be \u0995\u09b0\u09c1\u09a8</div>
+  <div id="srvBanner">&#9888;&#65039; সার্ভার সাময়িক বন্ধ আছে — কিছুক্ষণ পরে আবার চেষ্টা করুন</div>
   <div id="home">
     <input class="search" id="q" placeholder="&#128269; Search apps..." oninput="render()">
     <div class="list" id="list"><div class="loading"><span class="spin">&#9618;&#9618;&#9618;</span> LOADING...</div></div>
@@ -81,16 +81,16 @@ footer{text-align:center;margin-top:24px;font-size:10px;color:#55557a;letter-spa
 
 <div class="modal hide" id="srvModal">
   <div class="box">
-    <h3>&#9888;&#65039; \u09b8\u09be\u09b0\u09cd\u09ad\u09be\u09b0 \u09ac\u09a8\u09cd\u09a7 \u0986\u099b\u09c7!</h3>
-    <p>\u09b8\u09be\u09b0\u09cd\u09ad\u09be\u09b0 \u09b8\u09be\u09ae\u09af\u09bc\u09bf\u0995 \u09ac\u09a8\u09cd\u09a7 \u0986\u099b\u09c7\u0964<br>\u0995\u09bf\u099b\u09c1\u0995\u09cd\u09b7\u09a3 \u09aa\u09b0\u09c7 \u0986\u09ac\u09be\u09b0 \u099a\u09c7\u09b7\u09cd\u099f\u09be \u0995\u09b0\u09c1\u09a8\u0964</p>
+    <h3>&#9888;&#65039; সার্ভার বন্ধ আছে!</h3>
+    <p>সার্ভার সাময়িক বন্ধ আছে।<br>কিছুক্ষণ পরে আবার চেষ্টা করুন।</p>
     <button onclick="document.getElementById('srvModal').classList.add('hide')">OK &#10003;</button>
   </div>
 </div>
 
 <div class="modal hide" id="tgModal">
   <div class="box">
-    <h3>&#128241; \u099f\u09c7\u09b2\u09bf\u0997\u09cd\u09b0\u09be\u09ae \u09a5\u09c7\u0995\u09c7 \u0996\u09c1\u09b2\u09c1\u09a8</h3>
-    <p>\u09a1\u09be\u0989\u09a8\u09b2\u09cb\u09a1 \u0995\u09b0\u09a4\u09c7 \u099f\u09c7\u09b2\u09bf\u0997\u09cd\u09b0\u09be\u09ae \u09ac\u099f \u09a5\u09c7\u0995\u09c7 \u0985\u09cd\u09af\u09be\u09aa\u099f\u09be \u0996\u09c1\u09b2\u09c1\u09a8!<br><br>&#128073; @rashd12bot</p>
+    <h3>&#128241; টেলিগ্রাম থেকে খুলুন</h3>
+    <p>ডাউনলোড করতে টেলিগ্রাম বট থেকে অ্যাপটা খুলুন!<br><br>&#128073; @rashd12bot</p>
     <button onclick="document.getElementById('tgModal').classList.add('hide')">OK &#10003;</button>
   </div>
 </div>
@@ -115,13 +115,13 @@ function render(){
   const q = (document.getElementById('q').value||'').toLowerCase();
   const list = document.getElementById('list');
   const items = APPS.map((a,i)=>({...a,rank:i+1})).filter(a=>(a.label+' '+a.file).toLowerCase().includes(q));
-  if(!items.length){ list.innerHTML='<div class="err">\u0995\u09bf\u099b\u09c1 \u09aa\u09be\u0993\u09df\u09be \u0997\u09c7\u09b2\u09cb \u09a8\u09be</div>'; return; }
+  if(!items.length){ list.innerHTML='<div class="err">কিছু পাওয়া যায়নি 🔍</div>'; return; }
   list.innerHTML = items.map(a=>`
     <div class="item" onclick="openDetail(${a.rank-1})">
       <div class="rank">#${a.rank}</div>
-      ${a.logo?`<img src="${esc(a.logo)}" loading="lazy" onerror="this.style.display='none'">`:'<div style="width:52px;height:52px;border-radius:10px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:24px">\u0001\uF4E6</div>'}
-      <div class="meta"><div class="name">${esc(a.label)}</div><div class="dl">\u2B07 ${fmt(a.dl)} downloads</div></div>
-      <span class="badge b-new">\u0001\uF195 NEW</span>
+      ${a.logo?`<img src="${esc(a.logo)}" loading="lazy" onerror="this.style.display='none'">`:'<div style="width:52px;height:52px;border-radius:10px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:24px">📦</div>'}
+      <div class="meta"><div class="name">${esc(a.label)}</div><div class="dl">⬇ ${fmt(a.dl)} downloads</div></div>
+      <span class="badge b-new">🆕 NEW</span>
     </div>`).join('');
 }
 function openDetail(idx){
@@ -131,17 +131,17 @@ function openDetail(idx){
   d.classList.add('on');
   d.innerHTML = `
     <div class="d-head">
-      ${a.logo?`<img src="${esc(a.logo)}" onerror="this.style.display='none'">`:'<div style="font-size:64px">\u0001\uF4E6</div>'}
+      ${a.logo?`<img src="${esc(a.logo)}" onerror="this.style.display='none'">`:'<div style="font-size:64px">📦</div>'}
       <h2>${esc(a.label)}</h2>
     </div>
     ${a.desc?`<div class="d-desc">${esc(a.desc)}</div>`:''}
     <div class="d-stats">
-      <div class="d-stat"><div class="v">\u2B07 ${fmt(a.dl)}</div><div class="l">DOWNLOADS</div></div>
+      <div class="d-stat"><div class="v">⬇ ${fmt(a.dl)}</div><div class="l">DOWNLOADS</div></div>
       <div class="d-stat"><div class="v">${esc(a.size_h||'?')}</div><div class="l">SIZE</div></div>
       <div class="d-stat"><div class="v">#${idx+1}</div><div class="l">RANK</div></div>
     </div>
-    <button class="btn-dl" onclick="dlApp(${idx})">\u2B07 DOWNLOAD NOW</button>
-    <button class="btn-back" onclick="goHome()">\u2190 BACK TO LIST</button>`;
+    <button class="btn-dl" onclick="dlApp(${idx})">⬇ DOWNLOAD NOW</button>
+    <button class="btn-back" onclick="goHome()">← BACK TO LIST</button>`;
   window.scrollTo(0,0);
 }
 function goHome(){ document.getElementById('detail').classList.remove('on'); document.getElementById('home').style.display='block'; }
@@ -153,7 +153,7 @@ async function dlApp(idx){
   const initData = tgInit();
   if(!initData){ document.getElementById('tgModal').classList.remove('hide'); return; }
   const btn = document.querySelector('.btn-dl');
-  if(btn){ btn.disabled=true; btn.textContent='\u23F3 \u099A\u09C7\u0995 \u09B9\u099A\u09CD\u099B\u09C7...'; }
+  if(btn){ btn.disabled=true; btn.textContent='⏳ চেক হচ্ছে...'; }
   try{
     const r = await (await fetch(API + '/api/dl', {method:'POST', headers:{'Content-Type':'application/json'},
       body:JSON.stringify({initData, app_id:a.id})})).json();
@@ -162,16 +162,15 @@ async function dlApp(idx){
       try{ if(window.Telegram&&Telegram.WebApp){ Telegram.WebApp.openLink(url); return; } }catch(e){}
       location.href = url;
     } else if(r.reason==='nocredit'){
-      alert('\u0001\uF512 \u0995\u09CD\u09B0\u09C7\u09A1\u09BF\u099F \u09B6\u09C7\u09B7! \u09B0\u09C7\u09AB\u09BE\u09B0 \u0995\u09B0\u09CB \u2014 \u09E7 \u09B0\u09C7\u09AB\u09BE\u09B0 = \u09E7 \u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1');
-    } else alert('\u26A0 \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE \u09B9\u09DF\u09C7\u099B\u09C7, \u0986\u09AC\u09BE\u09B0 \u091A\u09C7\u09B7\u09CD\u099F\u09BE \u0995\u09B0\u09CB\u0964');
-  }catch(e){ alert('\u26A0 \u09A8\u09C7\u099F\u0993\u09DF\u09BE\u09B0\u09CD\u0995 \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE!'); }
-  if(btn){ btn.disabled=false; btn.textContent='\u2B07 DOWNLOAD NOW'; }
+      alert('🔒 ক্রেডিট শেষ! রেফার করো — ১ রেফার = ১ ডাউনলোড');
+    } else alert('⚠ সমস্যা হয়েছে, আবার চেষ্টা করো।');
+  }catch(e){ alert('⚠ নেটওয়ার্ক সমস্যা!'); }
+  if(btn){ btn.disabled=false; btn.textContent='⬇ DOWNLOAD NOW'; }
 }
 try{ if(window.Telegram && Telegram.WebApp){ Telegram.WebApp.ready(); Telegram.WebApp.expand(); } }catch(e){}
 render();
 checkServer();
 setInterval(checkServer, 60000);
-
 </script>
 </body>
 </html>
